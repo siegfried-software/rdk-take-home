@@ -41,6 +41,7 @@ def display_cities(city_list, search_limit):
             pass
         except ValueError:
             print("That is not an integer. Please try again.")
+            continue
 
         if user_choice < 1 or user_choice > int(search_limit):
             print("Choice is outside of range")
@@ -51,7 +52,88 @@ def display_cities(city_list, search_limit):
 
     return user_choice
 
+# Displays weather for chosen city in great detail
+def display_weather(data):
+    report = f"""
+============ WEATHER REPORT ============
+Location: {data['name']}, {data.get('sys', {}).get('country', 'N/A')}
 
+Coordinates:
+  Latitude:  {data['coord']['lat']}
+  Longitude: {data['coord']['lon']}
 
+Weather:
+{chr(10).join(f"  {w['main']} ({w['description']})" for w in data['weather'])}
+
+Temperature:
+  Current:    {data['main']['temp']}°F
+  Feels like: {data['main']['feels_like']}°F
+  Min:        {data['main']['temp_min']}°F
+  Max:        {data['main']['temp_max']}°F
+
+Conditions:
+  Humidity: {data['main']['humidity']}%
+  Pressure: {data['main']['pressure']} hPa
+  Clouds:   {data['clouds']['all']}%
+
+Wind:
+  Speed:     {data['wind']['speed']} mph
+  Direction: {data['wind']['deg']}°
+========================================
+"""
+    print(report.strip())
+
+# Ensures that user selects a valid city to search
+def prompt_search(favorites):
+    display_favorites(favorites)
+    user_choice = 0
+    while True:
+        try:
+            user_choice = int(input("Please input the number corresponding to the city you want to search: "))
+            pass
+        except ValueError:
+            print("That is not an integer. Please try again.")
+            continue
+
+        if user_choice > len(favorites) or user_choice < 1:
+            print("Choice is outside of range")
+            continue
+        else: 
+            print("Favorite city to search: ", user_choice)
+            break
+
+    return user_choice
+
+# Loops through favorites, makes them displayable, and prints
+def display_favorites(favorites):
+    displayable_list = []
+    for i in range(0, len(favorites)):
+        displayable_list.append(format_location(favorites[i]))
+
+    print("\n============ FAVORITE CITIES ============\n") 
+    for i in range(0, len(displayable_list)):
+        print(f"{i+1}) {displayable_list[i]}")
+    print("\n======================================\n")
+
+# Ensures that user selects a valid city to delete
+def prompt_delete(favorites):
+    display_favorites(favorites)
+    user_choice = 0
+    while True:
+        try:
+            user_choice = int(input("Please input the number corresponding to the city you want to delete: "))
+            pass
+        except ValueError:
+            print("That is not an integer. Please try again.")
+            continue
+
+        if user_choice > len(favorites) or user_choice < 1:
+            print("Choice is outside of range")
+            continue
+        else: 
+            print("Favorite city to delete: ", user_choice)
+            break
+
+    return user_choice
 
 

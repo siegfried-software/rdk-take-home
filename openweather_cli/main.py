@@ -4,9 +4,11 @@ from api_funcs import *
 
 class OpenWeatherCLI(cmd.Cmd):
     intro = """
-============ OPENWEATHERCLI ============\n
-To begin, type 'help' to list available commands.\n
-========================================\n
+============ OPENWEATHERCLI ============
+
+To begin, type 'help' to list available commands.
+
+========================================
     """    
     prompt = 'OpenWeatherCLI>> '
     
@@ -16,22 +18,32 @@ To begin, type 'help' to list available commands.\n
 
     def do_searchname(self, arg):
         "Search for a city by name. EX: searchname Philadelphia"
-        #try:
-        search_name(arg)
-        #except Exception as e:
-         #   print("Error: Did you forget an input?")
+        try:
+            search_name(arg)
+        except Exception as e:
+            print("Error: Input was either forgotten or not found")
 
     def do_searchfav(self,arg):
         "Search for a city based off of favorites. EX: searchfav 1"
-    
+        #try:
+        search_favorites()
+        #except ValueError:
+        #    print("Unable to search given the input")
+
     def do_listfav(self, arg):
-        "List all user specified favorite cities."
+        "List all user specified favorite cities. Takes no args"
+        list_favorites()
 
     def do_addfav(self, arg):
-        "Add the name of a city to your favorites. EX: addfav New York"
+        "Add a city to your favorites. EX: addfav New York"
+        try:
+            add_favorites(arg)
+        except Exception as e:
+            print("Error: Input was either forgotten or not found")
 
     def do_delfav(self, arg):
-        "Delete a city from your favorites. EX: delfav 3"
+        "Delete a city from your favorites. Takes no args."
+        delete_favorites()
 
     def do_quit(self, line):
         """Quits the program."""
