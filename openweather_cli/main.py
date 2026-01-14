@@ -21,17 +21,17 @@ To begin, type 'help' to list available commands.
         try:
             search_name(arg)
         except Exception as e:
-            print("Error: Input was either forgotten or not found")
+            print("Error: Input was either forgotten or not found.")
 
     def do_searchfav(self,arg):
-        "Search for a city based off of favorites. EX: searchfav 1"
+        "Search for a city based off of favorites. Takes no args."
         try:
             search_favorites()
         except ValueError:
-            print("Unable to search given the input")
+            print("Unable to search given the input.")
 
     def do_listfav(self, arg):
-        "List all user specified favorite cities. Takes no args"
+        "List all user specified favorite cities with their weather reports. Takes no args."
         list_favorites()
 
     def do_addfav(self, arg):
@@ -39,7 +39,7 @@ To begin, type 'help' to list available commands.
         try:
             add_favorites(arg)
         except Exception as e:
-            print("Error: Input was either forgotten or not found")
+            print("Error: Input was either forgotten or not found.")
 
     def do_delfav(self, arg):
         "Delete a city from your favorites. Takes no args."
