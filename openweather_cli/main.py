@@ -25,10 +25,10 @@ To begin, type 'help' to list available commands.
 
     def do_searchfav(self,arg):
         "Search for a city based off of favorites. EX: searchfav 1"
-        #try:
-        search_favorites()
-        #except ValueError:
-        #    print("Unable to search given the input")
+        try:
+            search_favorites()
+        except ValueError:
+            print("Unable to search given the input")
 
     def do_listfav(self, arg):
         "List all user specified favorite cities. Takes no args"
